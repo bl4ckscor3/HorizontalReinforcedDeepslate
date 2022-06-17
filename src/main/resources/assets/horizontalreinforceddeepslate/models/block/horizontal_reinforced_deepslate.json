@@ -1,0 +1,22 @@
+{
+    "parent": "block/block",
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "bottom" },
+                "up":    { "texture": "#top", "rotation": 180, "cullface": "top" },
+                "north": { "texture": "#side", "cullface": "side" },
+                "south": { "texture": "#side", "cullface": "side" },
+                "west":  { "texture": "#side", "cullface": "side" },
+                "east":  { "texture": "#side", "cullface": "side" }
+            }
+        }
+    ],
+    "textures": {
+        "particle": "minecraft:block/reinforced_deepslate_side",
+        "bottom": "minecraft:block/reinforced_deepslate_bottom",
+        "top": "minecraft:block/reinforced_deepslate_top",
+        "side": "minecraft:block/reinforced_deepslate_side"
+    }
+}

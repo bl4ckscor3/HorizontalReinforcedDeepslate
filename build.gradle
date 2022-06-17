@@ -1,0 +1,68 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.parchmentmc:librarian:1.+'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'eclipse'
+
+version = '1.0'
+group = 'bl4ckscor3.mod.horizontalreinforceddeepslate'
+archivesBaseName = 'horizontalreinforceddeepslate-1.19'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+minecraft {
+    mappings channel: 'parchment', version: '1.18.2-2022.06.05-1.19'
+	
+    runs {
+        client {
+		    workingDirectory project.file('run/client')
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                horizontalreinforceddeepslate {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+		    workingDirectory project.file('run/server')
+            property 'forge.logging.console.level', 'debug'
+            args '-nogui'
+
+            mods {
+                horizontalreinforceddeepslate {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.19-41.0.35'
+}
+
+jar {
+    manifest {
+        attributes(["Specification-Title": "Horizontal Reinforced Deepslate",
+                    "Specification-Vendor": "bl4ckscor3",
+                    "Specification-Version": "${version}",
+                    "Implementation-Title": "Horizontal Reinforced Deepslate",
+                    "Implementation-Version": "${version}",
+                    "Implementation-Vendor" :"bl4ckscor3",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
+    }
+}

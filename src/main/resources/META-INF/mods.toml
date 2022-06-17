@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[41,)"
+license="GNU GPL v3.0 https://github.com/bl4ckscor3/HorizontalReinforcedDeepslate/blob/1.19/LICENSE"
+
+[[mods]]
+	modId="horizontalreinforceddeepslate"
+	version="${file.jarVersion}"
+	displayName="Horizontal Reinforced Deepslate"
+	description='''Allows vanilla's reinforced deepslate to be placed horizontally.'''
+	issueTrackerURL="http://github.com/bl4ckscor3/HorizontalDeepslate/issues"
+	displayURL="https://curseforge.com/minecraft/mc-mods/horizontal-reinforced-deepslate"
+	authors="bl4ckscor3"
+
+[[dependencies.horizontalreinforceddeepslate]]
+    modId="forge"
+    mandatory=true
+    versionRange="[41,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.horizontalreinforceddeepslate]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19,1.20)"
+    ordering="NONE"
+    side="BOTH"

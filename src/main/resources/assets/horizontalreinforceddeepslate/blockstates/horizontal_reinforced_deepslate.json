@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "horizontalreinforceddeepslate:block/horizontal_reinforced_deepslate",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "horizontalreinforceddeepslate:block/horizontal_reinforced_deepslate",
+      "x": 90,
+      "y": 90
+    },
+    "facing=south": {
+      "model": "horizontalreinforceddeepslate:block/horizontal_reinforced_deepslate",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "horizontalreinforceddeepslate:block/horizontal_reinforced_deepslate",
+      "x": 270,
+      "y": 90
+    }
+  }
+}
