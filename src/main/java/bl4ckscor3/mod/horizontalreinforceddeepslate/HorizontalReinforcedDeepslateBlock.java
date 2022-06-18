@@ -43,9 +43,22 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 
 			if (face.getAxis() != Axis.Y) {
 				Level level = event.getWorld();
-				BlockPos placeAt = event.getPos().relative(face);
+				BlockPos placeAt = event.getPos();
+				BlockState stateAtPos = level.getBlockState(placeAt);
+				boolean replaceBlock = false;
 
-				if (level.isEmptyBlock(placeAt)) {
+				//check if the clicked block is replaceable, and if it is, allow placement at that position
+				if (!stateAtPos.getMaterial().isReplaceable()) {
+					placeAt = event.getPos().relative(face);
+
+					//if not, check if the block space next to the clicked block is replaceable, and if it is, allow placement there
+					if (level.getBlockState(placeAt).getMaterial().isReplaceable())
+						replaceBlock = true;
+				}
+				else
+					replaceBlock = true;
+
+				if (replaceBlock || level.isEmptyBlock(placeAt)) {
 					Player player = event.getPlayer();
 					SoundType sound = SoundType.DEEPSLATE;
 					BlockState stateToPlace = HorizontalReinforcedDeepslate.HORIZONTAL_REINFORCED_DEEPSLATE.get().defaultBlockState().setValue(HORIZONTAL_FACING, face);
