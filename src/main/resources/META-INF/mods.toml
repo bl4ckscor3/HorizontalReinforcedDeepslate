@@ -14,7 +14,7 @@ issueTrackerURL="http://github.com/bl4ckscor3/HorizontalReinforcedDeepslate/issu
 [[dependencies.horizontalreinforceddeepslate]]
     modId="forge"
     mandatory=true
-    versionRange="[41,)"
+    versionRange="[41.0.94,)"
     ordering="NONE"
     side="BOTH"
 

@@ -42,7 +42,7 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 			Direction face = event.getFace();
 
 			if (face.getAxis() != Axis.Y) {
-				Level level = event.getWorld();
+				Level level = event.getLevel();
 				BlockPos placeAt = event.getPos();
 				BlockState stateAtPos = level.getBlockState(placeAt);
 				boolean replaceBlock = false;
@@ -59,7 +59,7 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 					replaceBlock = true;
 
 				if (replaceBlock || level.isEmptyBlock(placeAt)) {
-					Player player = event.getPlayer();
+					Player player = event.getEntity();
 					SoundType sound = SoundType.DEEPSLATE;
 					BlockState stateToPlace = HorizontalReinforcedDeepslate.HORIZONTAL_REINFORCED_DEEPSLATE.get().defaultBlockState().setValue(HORIZONTAL_FACING, face);
 
