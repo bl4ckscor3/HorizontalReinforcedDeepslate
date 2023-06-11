@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,11 +47,11 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 				boolean replaceBlock = false;
 
 				//check if the clicked block is replaceable, and if it is, allow placement at that position
-				if (!stateAtPos.getMaterial().isReplaceable()) {
+				if (!stateAtPos.canBeReplaced()) {
 					placeAt = event.getPos().relative(face);
 
 					//if not, check if the block space next to the clicked block is replaceable, and if it is, allow placement there
-					if (level.getBlockState(placeAt).getMaterial().isReplaceable())
+					if (level.getBlockState(placeAt).canBeReplaced())
 						replaceBlock = true;
 				}
 				else
@@ -74,11 +73,6 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 				}
 			}
 		}
-	}
-
-	@Override
-	public PushReaction getPistonPushReaction(BlockState state) {
-		return PushReaction.BLOCK;
 	}
 
 	@Override
