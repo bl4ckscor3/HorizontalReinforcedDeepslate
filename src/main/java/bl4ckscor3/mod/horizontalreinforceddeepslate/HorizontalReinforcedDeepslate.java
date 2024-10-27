@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class HorizontalReinforcedDeepslate {
 	public static final String MODID = "horizontalreinforceddeepslate";
 	private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-	public static final DeferredBlock<HorizontalReinforcedDeepslateBlock> HORIZONTAL_REINFORCED_DEEPSLATE = BLOCKS.register("horizontal_reinforced_deepslate", () -> new HorizontalReinforcedDeepslateBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.REINFORCED_DEEPSLATE).pushReaction(PushReaction.BLOCK)));
+	public static final DeferredBlock<HorizontalReinforcedDeepslateBlock> HORIZONTAL_REINFORCED_DEEPSLATE = BLOCKS.registerBlock("horizontal_reinforced_deepslate", HorizontalReinforcedDeepslateBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.REINFORCED_DEEPSLATE).pushReaction(PushReaction.BLOCK));
 
 	public HorizontalReinforcedDeepslate(IEventBus modEventBus) {
 		BLOCKS.register(modEventBus);

@@ -66,7 +66,7 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 					level.gameEvent(GameEvent.BLOCK_PLACE, placeAt, GameEvent.Context.of(player, stateToPlace));
 					level.playSound(player, placeAt.getX(), placeAt.getY(), placeAt.getZ(), sound.getPlaceSound(), SoundSource.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
 					event.setCanceled(true);
-					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
+					event.setCancellationResult(InteractionResult.SUCCESS);
 
 					if (!player.getAbilities().instabuild)
 						held.shrink(1);
@@ -78,11 +78,6 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 	@Override
 	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
 		return Blocks.REINFORCED_DEEPSLATE.getCloneItemStack(state, target, level, pos, player);
-	}
-
-	@Override
-	public String getDescriptionId() {
-		return Blocks.REINFORCED_DEEPSLATE.getDescriptionId();
 	}
 
 	@Override
