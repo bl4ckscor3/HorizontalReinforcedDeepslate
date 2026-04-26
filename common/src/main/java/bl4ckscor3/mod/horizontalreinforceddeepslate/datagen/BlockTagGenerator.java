@@ -6,24 +6,23 @@ import java.util.concurrent.CompletableFuture;
 import bl4ckscor3.mod.horizontalreinforceddeepslate.HorizontalReinforcedDeepslate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.VanillaBlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
 
-public class BlockTagGenerator extends BlockTagsProvider {
+public class BlockTagGenerator extends VanillaBlockTagsProvider {
 	public BlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-		super(output, lookupProvider, HorizontalReinforcedDeepslate.MODID);
+		super(output, lookupProvider);
 	}
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
-		//@formatter:off
 		List<TagKey<Block>> blockTags = List.of(
-				BlockTags.DRAGON_IMMUNE,
-				BlockTags.FEATURES_CANNOT_REPLACE,
-				BlockTags.WITHER_IMMUNE);
-		//@formatter:on
+			BlockTags.DRAGON_IMMUNE,
+			BlockTags.FEATURES_CANNOT_REPLACE,
+			BlockTags.WITHER_IMMUNE
+		);
 
 		blockTags.forEach(tagKey -> tag(tagKey).add(HorizontalReinforcedDeepslate.HORIZONTAL_REINFORCED_DEEPSLATE.get()));
 	}

@@ -18,11 +18,7 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 
-@EventBusSubscriber(modid = HorizontalReinforcedDeepslate.MODID)
 public class HorizontalReinforcedDeepslateBlock extends Block {
 	public static final EnumProperty<Direction> HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -32,22 +28,15 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 		registerDefaultState(stateDefinition.any().setValue(HORIZONTAL_FACING, Direction.NORTH));
 	}
 
-	@SubscribeEvent
-	public static void onRightClickBlock(RightClickBlock event) {
-		ItemStack held = event.getItemStack();
-
+	public static InteractionResult onRightClickBlock(ItemStack held, Direction face, Level level, BlockPos placeAt, Player player) {
 		if (held.getItem() instanceof BlockItem blockItem && blockItem.getBlock() == Blocks.REINFORCED_DEEPSLATE) {
-			Direction face = event.getFace();
-
 			if (face.getAxis() != Axis.Y) {
-				Level level = event.getLevel();
-				BlockPos placeAt = event.getPos();
 				BlockState stateAtPos = level.getBlockState(placeAt);
 				boolean replaceBlock = false;
 
 				//check if the clicked block is replaceable, and if it is, allow placement at that position
 				if (!stateAtPos.canBeReplaced()) {
-					placeAt = event.getPos().relative(face);
+					placeAt = placeAt.relative(face);
 
 					//if not, check if the block space next to the clicked block is replaceable, and if it is, allow placement there
 					if (level.getBlockState(placeAt).canBeReplaced())
@@ -57,26 +46,27 @@ public class HorizontalReinforcedDeepslateBlock extends Block {
 					replaceBlock = true;
 
 				if (replaceBlock || level.isEmptyBlock(placeAt)) {
-					Player player = event.getEntity();
 					SoundType sound = SoundType.DEEPSLATE;
 					BlockState stateToPlace = HorizontalReinforcedDeepslate.HORIZONTAL_REINFORCED_DEEPSLATE.get().defaultBlockState().setValue(HORIZONTAL_FACING, face);
 
 					level.setBlockAndUpdate(placeAt, stateToPlace);
 					level.gameEvent(GameEvent.BLOCK_PLACE, placeAt, GameEvent.Context.of(player, stateToPlace));
 					level.playSound(player, placeAt.getX(), placeAt.getY(), placeAt.getZ(), sound.getPlaceSound(), SoundSource.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
-					event.setCanceled(true);
-					event.setCancellationResult(InteractionResult.SUCCESS);
 
 					if (!player.getAbilities().instabuild)
 						held.shrink(1);
+
+					return InteractionResult.SUCCESS;
 				}
 			}
 		}
+
+		return InteractionResult.PASS;
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
-		return Blocks.REINFORCED_DEEPSLATE.getCloneItemStack(level, pos, state, includeData, player);
+	protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
+		return new ItemStack(Blocks.REINFORCED_DEEPSLATE);
 	}
 
 	@Override
