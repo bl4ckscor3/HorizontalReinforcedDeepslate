@@ -24,6 +24,6 @@ public class BlockTagGenerator extends VanillaBlockTagsProvider {
 			BlockTags.WITHER_IMMUNE
 		);
 
-		blockTags.forEach(tagKey -> tag(tagKey).add(HorizontalReinforcedDeepslate.HORIZONTAL_REINFORCED_DEEPSLATE.get()));
+		blockTags.forEach(tagKey -> tag(tagKey).add(HorizontalReinforcedDeepslate.HORIZONTAL_REINFORCED_DEEPSLATE.key()));
 	}
 }
