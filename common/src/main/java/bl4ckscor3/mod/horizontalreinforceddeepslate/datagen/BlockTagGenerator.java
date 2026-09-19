@@ -21,7 +21,8 @@ public class BlockTagGenerator extends VanillaBlockTagsProvider {
 		List<TagKey<Block>> blockTags = List.of(
 			BlockTags.DRAGON_IMMUNE,
 			BlockTags.FEATURES_CANNOT_REPLACE,
-			BlockTags.WITHER_IMMUNE
+			BlockTags.WITHER_IMMUNE,
+			BlockTags.BLOCKS_MOTION_NO_LEAVES
 		);
 
 		blockTags.forEach(tagKey -> tag(tagKey).add(HorizontalReinforcedDeepslate.HORIZONTAL_REINFORCED_DEEPSLATE.key()));
