@@ -10,14 +10,20 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.InteractionResult;
 
 public class FabricEntrypoint implements ModInitializer, Platform {
 	@Override
 	public void onInitialize() {
 		HorizontalReinforcedDeepslate.initialize(this);
-		BlockEvents.USE_ITEM_ON.register((itemStack, _, level, _, player, _, blockHitResult) ->
-			HorizontalReinforcedDeepslateBlock.onRightClickBlock(itemStack, blockHitResult.getDirection(), level, blockHitResult.getBlockPos(), player)
-		);
+		BlockEvents.USE_ITEM_ON.register((itemStack, _, level, _, player, _, blockHitResult) -> {
+			InteractionResult result = HorizontalReinforcedDeepslateBlock.onRightClickBlock(itemStack, blockHitResult.getDirection(), level, blockHitResult.getBlockPos(), player);
+
+			if (result == InteractionResult.PASS)
+				return null;
+			else
+				return result;
+		});
 	}
 
 	@Override
